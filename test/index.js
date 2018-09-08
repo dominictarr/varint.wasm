@@ -26,7 +26,7 @@ tape('simple', function (t) {
     c += v.buffer[0]
     }
   }
-  console.log(i, sum, Date.now() - start)
+  console.log('wasm', i, sum, Date.now() - start)
 
   var start = Date.now(), i = 0
   for(var j = 0; j < 100 ;j++) {
@@ -37,19 +37,13 @@ tape('simple', function (t) {
       c+=varint.decode.bytes
     }
   }
-  console.log(i, sum, Date.now() - start)
+  console.log('js', i, sum, Date.now() - start)
 
   var start = Date.now(), i = 0
   for(var j = 0; j < 100 ;j++) {
     var sum  = v.sum(1, 0)
-    
-//    for(var c = 1; c < v.buffer.length;) {
-//      i++
-//      sum += varint.decode(v.buffer, c)
-//      c+=varint.decode.bytes
-//    }
   }
-  console.log(i, sum, Date.now() - start)
+  console.log('bulk-wasm', null, sum, Date.now() - start)
 
 
   t.end()
@@ -57,22 +51,8 @@ tape('simple', function (t) {
 
 function noop (i) { return i }
 
-tape('js noop', function (t) {
-  var sum = 0
-  var start = Date.now()
-  for(var i = 0; i < 10000000; i++)
-    sum += noop(i)
-  console.log(Date.now() - start)
-  t.end()
-})
-tape('wasm noop', function (t) {
-  var sum = 0
-  var start = Date.now()
-  for(var i = 0; i < 10000000; i++)
-    sum += v.noop(i)
-  console.log(Date.now() - start)
-  t.end()
-})
+
+
 
 
 
