@@ -7,8 +7,6 @@ var instance = new WebAssembly.Instance(m, {})
 
 exports.buffer = new Buffer(instance.exports.memory.buffer)
 exports.decode = instance.exports.decode
-
-
 exports.bytes = instance.exports.bytes
 exports.noop = instance.exports.noop
 exports.sum = instance.exports.sum
